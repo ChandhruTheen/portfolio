@@ -1,0 +1,1303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theen | Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: #0d1117;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Spider web canvas */
+#web-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Navigation */
+.heading {
+    width: 100%;
+    min-height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 6%;
+    background: #fff;
+    color: #111;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.heading h2 {
+    font-size: 28px;
+}
+
+.navbar {
+    display: flex;
+    gap: 25px;
+}
+
+.navbar a {
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.navbar a:hover {
+    color: blue;
+}
+
+/* Hamburger button */
+.menu-btn {
+    display: none;
+    background: transparent;
+    color: #111;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Marquee */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: #140049;
+    color: white;
+    padding: 12px 0;
+}
+
+.marquee-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-left 15s linear infinite;
+}
+
+.marquee-container:hover .marquee-text {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Home */
+.profile {
+    width: 100%;
+    min-height: calc(100vh - 110px);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 8%;
+}
+
+.image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 40px;
+}
+
+.fun {
+    list-style: none;
+}
+
+.fun h1 {
+    font-size: clamp(35px, 5vw, 60px);
+    margin-bottom: 15px;
+}
+
+.fun h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.fun p {
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+.me {
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+.firstimg {
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+    border-radius: 50%;
+    background: black;
+    color: white;
+    font-size: 18px;
+}
+
+/* Common section title */
+.section-title {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 40px;
+}
+
+/* About */
+.about-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 70px 8%;
+    background: #f4f4f4;
+    color: #111;
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.secondimg {
+    width: 320px;
+    height: 400px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.content {
+    flex: 1;
+}
+
+.content h2 {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.content h3 {
+    margin-bottom: 15px;
+}
+
+.content p {
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+.resum {
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Skills */
+.skills {
+    min-height: 100vh;
+    padding: 70px 8%;
+    background: rgb(35, 4, 94);
+}
+
+.info {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+
+.back {
+    max-width: 1200px;
+    margin: auto;
+    background: aliceblue;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.full {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding: 15px;
+    background: rgb(66, 16, 204);
+    border-radius: 10px;
+}
+
+.box {
+    min-height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: black;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.box:hover {
+    background: blue;
+    transform: translateY(-5px);
+}
+
+/* Education */
+.education {
+    width: 100%;
+    min-height: 100vh;
+    padding: 70px 8%;
+    background: azure;
+    color: #111;
+    text-align: center;
+}
+
+.my {
+    color: purple;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.my1 {
+    margin-bottom: 40px;
+}
+
+.clg {
+    max-width: 1100px;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    background: white;
+    margin: 25px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.clgph {
+    width: 300px;
+    min-height: 250px;
+    object-fit: cover;
+}
+
+.text {
+    padding: 30px;
+}
+
+.text h2, .text h1 {
+    margin-bottom: 15px;
+}
+
+/* Projects */
+.project {
+    min-height: 100vh;
+    padding: 70px 8%;
+    background: rgb(3, 3, 66);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pro1 {
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.made {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.made img {
+    width: 350px;
+    max-width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.made img:hover {
+    transform: scale(1.05);
+}
+
+.view {
+    font-size: 20px;
+    color: white;
+    background: blue;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 35px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+/* Experience */
+.exp {
+    min-height: 100vh;
+    padding: 70px 8%;
+    background: #fff;
+    color: #111;
+}
+
+.ence {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.block {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.car {
+    padding: 30px;
+    min-height: 130px;
+    background: #f2f2f2;
+    border-left: 5px solid orange;
+    border-radius: 10px;
+}
+
+.car h2 {
+    margin-bottom: 10px;
+}
+
+.car p {
+    margin-top: 10px;
+    color: #555;
+}
+
+/* Contact */
+.maintouch {
+    min-height: 100vh;
+    background: rgb(169, 195, 207);
+    color: #111;
+    padding: 70px 8%;
+}
+
+.get {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.info1 {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.lap {
+    width: 350px;
+    max-width: 100%;
+    border-radius: 15px;
+}
+
+.in {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.seven {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.eight {
+    background: blue;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+/* Footer */
+.final {
+    width: 100%;
+    min-height: 350px;
+    background: rgb(0, 0, 44);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 50px 8%;
+}
+
+.keep, .keep2, .keep3 {
+    color: white;
+    line-height: 1.8;
+}
+
+.keep2 ul {
+    list-style: none;
+}
+
+.keep2 a {
+    color: white;
+    text-decoration: none;
+}
+
+.keep2 a:hover {
+    color: orange;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+
+    .full {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .navbar {
+        gap: 12px;
+    }
+
+    .about {
+        gap: 30px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .heading {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        min-height: 75px;
+    }
+
+    /* Show hamburger */
+    .menu-btn {
+        display: block;
+    }
+
+    /* Hide navbar by default */
+    .navbar {
+        display: none;
+        position: absolute;
+        top: 75px;
+        right: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 10px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Show navbar when clicked */
+    .navbar.active {
+        display: flex;
+    }
+
+    .navbar a {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .navbar a:hover {
+        background: #eee;
+    }
+
+    .profile {
+        padding: 40px 20px;
+    }
+
+    .image {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .firstimg {
+        width: 220px;
+        height: 220px;
+    }
+
+    .fun h2 {
+        font-size: 30px;
+    }
+
+    .about {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .secondimg {
+        width: 230px;
+        height: 280px;
+    }
+
+    .full {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .box {
+        min-height: 85px;
+        font-size: 14px;
+    }
+
+    .clg {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .clgph {
+        width: 100%;
+        height: 200px;
+    }
+
+    .block {
+        grid-template-columns: 1fr;
+    }
+
+    .info1 {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .lap {
+        width: 100%;
+    }
+
+    .final {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="web-canvas"></canvas>
+
+<!-- Header -->
+<header class="heading">
+
+    <h2>Theen</h2>
+
+    <button class="menu-btn" id="menuBtn"
+        aria-label="Open navigation menu"
+        aria-expanded="false">
+        ☰
+    </button>
+
+    <nav class="navbar" id="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skill">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+</header>
+
+<!-- Marquee -->
+<div class="marquee-container">
+    <div class="marquee-text">
+        Welcome to my profile! Explore my skills, learn more about me and discover my interests and experience.
+    </div>
+</div>
+
+<!-- Home -->
+<section class="profile" id="home">
+
+    <div class="image">
+
+        <div class="fun">
+
+            <h1>Hi there!</h1>
+            <h2>I'm Theen</h2>
+            <p>I am a Frontend Developer</p>
+
+            <a href="#about">
+                <button class="me">About Me ↓</button>
+            </a>
+
+            <div>
+                <span class="logo">in.</span>
+                <span class="logo">😺</span>
+                <span class="logo">🚀</span>
+                <span class="logo">🐦</span>
+                <span class="logo">📷</span>
+                <span class="logo">dev</span>
+            </div>
+
+        </div>
+
+        <div>
+            <img class="firstimg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtU3TzJn25BuB0TYW6yL_2fjNS0Brwq_g9GnUhiuyH8w&s=10"
+            alt="Profile photo">
+        </div>
+
+    </div>
+
+</section>
+
+<!-- About -->
+<section class="about-section" id="about">
+
+    <h1 class="section-title">🤵🏻 About Me</h1>
+
+    <div class="about">
+
+        <img class="secondimg"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4UNrUm7SWmhmmFbmcIjPKIiwRaLIG3qPzq0fVaWOKeg&s=10"
+        alt="About me">
+
+        <div class="content">
+
+            <h2>I'm Theen</h2>
+            <h3>Full Stack Developer</h3>
+
+            <p>
+                I am a Full-Stack developer based in Pune, India.
+                I am an Information Technology undergraduate from SPPU.
+                I am passionate about improving my coding skills and
+                developing applications and websites.
+                I build WebApps and Websites using MERN Stack.
+                I love building full-stack projects.
+            </p>
+
+            <br>
+
+            <h3>Email: theen@gmail.com</h3>
+            <h3>Place: Marthandam, India</h3>
+
+            <br>
+
+            <button class="resum">Resume</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Skills -->
+<section class="skills" id="skill">
+
+    <div class="info">
+        <h1>Skills & Abilities</h1>
+    </div>
+
+    <div class="back">
+
+        <div class="full">
+
+            <div class="box">React.JS</div>
+            <div class="box">Express.JS</div>
+            <div class="box">NodeJS</div>
+            <div class="box">Redux</div>
+            <div class="box">Firebase</div>
+            <div class="box">Android</div>
+            <div class="box">Material UI</div>
+            <div class="box">TailwindCSS</div>
+            <div class="box">Bootstrap</div>
+            <div class="box">Sass</div>
+            <div class="box">HTML5</div>
+            <div class="box">CSS3</div>
+            <div class="box">JavaScript</div>
+            <div class="box">Java</div>
+            <div class="box">Kotlin</div>
+            <div class="box">PHP</div>
+            <div class="box">Python</div>
+            <div class="box">C++</div>
+            <div class="box">MongoDB</div>
+            <div class="box">MySQL</div>
+            <div class="box">PostgreSQL</div>
+            <div class="box">AWS</div>
+            <div class="box">Heroku</div>
+            <div class="box">Netlify</div>
+            <div class="box">DigitalOcean</div>
+            <div class="box">jQuery</div>
+            <div class="box">Git</div>
+            <div class="box">GitHub</div>
+            <div class="box">WordPress</div>
+            <div class="box">VS Code</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Education -->
+<section class="education" id="education">
+
+    <h1 class="my">My Education</h1>
+
+    <p class="my1">
+        Education is not the learning of facts but the training of the mind to think.
+    </p>
+
+    <div class="clg">
+
+        <img class="clgph"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxO4leIeUeYisOAnxrmlWwbF0TOD883IUPvDIEq5vADw&s=10"
+        alt="College">
+
+        <div class="text">
+            <h2>Bachelor of Engineering in CSE</h2>
+            <p>Vins Christian College of Engineering</p>
+            <br>
+            <h3>2022-2026 | Completed</h3>
+        </div>
+
+    </div>
+
+    <div class="clg">
+
+        <img class="clgph"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Nb_oTMHw20d_q3q2pQ0y3Zn6mU4vN-41VVioSYNGVA&s=10"
+        alt="School">
+
+        <div class="text">
+            <h2>Computer Science</h2>
+            <p>Royal Matric Higher Secondary School</p>
+            <br>
+            <h3>2020-2022 | Completed</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Projects -->
+<section class="project" id="projects">
+
+    <h1 class="pro1">Projects Made</h1>
+
+    <div class="made">
+
+        <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyASu735I_YQT5KZsFGZ9HfUBM8sgg-Xv3a9Y1LBfG_A&s=10"
+        alt="Project one">
+
+        <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAQG41uJ2leAVTJj4-2Tt3OZiyxSCHIyOAMOFoY9GqMg&s=10"
+        alt="Project two">
+
+    </div>
+
+    <button class="view">View All</button>
+
+</section>
+
+<!-- Experience -->
+<section class="exp" id="experience">
+
+    <div class="ence">Experience</div>
+
+    <div class="block">
+
+        <div class="car">
+            <h2>Self Employed</h2>
+            <h4>Full Stack Developer</h4>
+            <p>Oct 2021 - Present</p>
+        </div>
+
+        <div class="car">
+            <h2>Mapstreak Flyseas</h2>
+            <h4>Web Developer | Internship</h4>
+            <p>June 2021 - Dec 2023</p>
+        </div>
+
+        <div class="car">
+            <h2>The Spark Foundation</h2>
+            <h4>Website Developer | Internship</h4>
+            <p>May 2021 - June 2021</p>
+        </div>
+
+        <div class="car">
+            <h2>The Spark Foundation</h2>
+            <h4>Mobile Application Developer | Internship</h4>
+            <p>April 2021 - May 2021</p>
+        </div>
+
+        <div class="car">
+            <h2>Frshr Technologies</h2>
+            <h4>WordPress Developer | Internship</h4>
+            <p>April 2021</p>
+        </div>
+
+        <div class="car">
+            <h2>WonderingBlog</h2>
+            <h4>Web Development & SEO | Internship</h4>
+            <p>March 2021 - April 2021</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Contact -->
+<section class="maintouch" id="contact">
+
+    <div class="touch">
+
+        <div class="get">
+            <h1>Get In Touch</h1>
+        </div>
+
+        <div class="info1">
+
+            <img class="lap"
+            src="https://img.magnific.com/premium-vector/cartoon-illustration-dedicated-man-hard-work-his-computer_1263357-20076.jpg?semt=ais_hybrid&w=740&q=80"
+            alt="Working on laptop">
+
+            <form class="in">
+
+                <input class="seven" type="text"
+                placeholder="Name" required>
+
+                <input class="seven" type="email"
+                placeholder="Email" required>
+
+                <input class="seven" type="tel"
+                placeholder="Phone">
+
+                <textarea class="seven"
+                placeholder="Message" rows="4" required></textarea>
+
+                <button class="eight" type="submit">Submit</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer class="final">
+
+    <div class="keep">
+
+        <h2>Theen's Portfolio</h2>
+
+        <br>
+
+        <p>
+            Thank you for visiting my personal portfolio website.
+            Connect with me over socials.
+        </p>
+
+        <br>
+
+        <p>Keep Rising 🚀</p>
+
+    </div>
+
+    <div class="keep2">
+
+        <h2>Quick Links</h2>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skill">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+        </ul>
+
+    </div>
+
+    <div class="keep3">
+
+        <h2>Contact Info</h2>
+
+        <br>
+
+        <p>Phone: +91 XXX-XXX-XXXX</p>
+        <p>theen21@gmail.com</p>
+        <p>Marthandam, India</p>
+
+    </div>
+
+</footer>
+
+<script>
+
+/* Hamburger menu functionality */
+
+const menuBtn = document.getElementById("menuBtn");
+const navbar = document.getElementById("navbar");
+
+menuBtn.addEventListener("click", function() {
+
+    navbar.classList.toggle("active");
+
+    const isOpen = navbar.classList.contains("active");
+
+    menuBtn.innerHTML = isOpen ? "✕" : "☰";
+
+    menuBtn.setAttribute("aria-expanded", isOpen);
+
+});
+
+// Close menu after clicking a link
+
+document.querySelectorAll(".navbar a").forEach(function(link) {
+
+    link.addEventListener("click", function() {
+
+        navbar.classList.remove("active");
+
+        menuBtn.innerHTML = "☰";
+
+        menuBtn.setAttribute("aria-expanded", "false");
+
+    });
+
+});
+
+// Close menu when clicking outside
+
+document.addEventListener("click", function(event) {
+
+    if (
+        !navbar.contains(event.target) &&
+        !menuBtn.contains(event.target)
+    ) {
+
+        navbar.classList.remove("active");
+
+        menuBtn.innerHTML = "☰";
+
+        menuBtn.setAttribute("aria-expanded", "false");
+
+    }
+
+});
+
+// Reset menu when resizing to desktop
+
+window.addEventListener("resize", function() {
+
+    if (window.innerWidth > 600) {
+
+        navbar.classList.remove("active");
+
+        menuBtn.innerHTML = "☰";
+
+        menuBtn.setAttribute("aria-expanded", "false");
+
+    }
+
+});
+
+
+/* Spider Web Animation */
+
+const canvas = document.getElementById("web-canvas");
+const ctx = canvas.getContext("2d");
+
+let width, height;
+let particles = [];
+
+const particleCount = 90;
+const maxDistance = 140;
+
+const mouse = {
+    x: null,
+    y: null,
+    radius: 160
+};
+
+// Resize canvas
+
+function resize() {
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+}
+
+window.addEventListener("resize", resize);
+
+resize();
+
+// Mouse movement
+
+window.addEventListener("mousemove", function(e) {
+
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+
+});
+
+window.addEventListener("mouseout", function(e) {
+
+    if (!e.relatedTarget) {
+
+        mouse.x = null;
+        mouse.y = null;
+
+    }
+
+});
+
+// Touch support
+
+window.addEventListener("touchmove", function(e) {
+
+    if (e.touches.length > 0) {
+
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+
+    }
+
+}, { passive: true });
+
+window.addEventListener("touchend", function() {
+
+    mouse.x = null;
+    mouse.y = null;
+
+});
+
+// Particle class
+
+class Particle {
+
+    constructor() {
+
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
+
+        this.size = 2;
+
+    }
+
+    update() {
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce from edges
+
+        if (this.x < 0 || this.x > width) {
+            this.vx *= -1;
+        }
+
+        if (this.y < 0 || this.y > height) {
+            this.vy *= -1;
+        }
+
+    }
+
+    draw() {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            this.x,
+            this.y,
+            this.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = "#58a6ff";
+        ctx.fill();
+
+    }
+
+}
+
+// Initialize particles
+
+function init() {
+
+    particles = [];
+
+    for (let i = 0; i < particleCount; i++) {
+
+        particles.push(new Particle());
+
+    }
+
+}
+
+// Connect particles
+
+function connect() {
+
+    for (let a = 0; a < particles.length; a++) {
+
+        for (let b = a + 1; b < particles.length; b++) {
+
+            const dx = particles[a].x - particles[b].x;
+            const dy = particles[a].y - particles[b].y;
+
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < maxDistance) {
+
+                const opacity = 1 - distance / maxDistance;
+
+                ctx.beginPath();
+
+                ctx.strokeStyle =
+                    `rgba(88, 166, 255, ${opacity})`;
+
+                ctx.lineWidth = 1;
+
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+
+                ctx.stroke();
+
+            }
+
+        }
+
+        // Connect particles to mouse
+
+        if (mouse.x !== null && mouse.y !== null) {
+
+            const dx = particles[a].x - mouse.x;
+            const dy = particles[a].y - mouse.y;
+
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < mouse.radius) {
+
+                ctx.beginPath();
+
+                ctx.strokeStyle =
+                    `rgba(255, 255, 255, ${1 - distance / mouse.radius})`;
+
+                ctx.lineWidth = 1.2;
+
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(mouse.x, mouse.y);
+
+                ctx.stroke();
+
+            }
+
+        }
+
+    }
+
+}
+
+// Animation loop
+
+function animate() {
+
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(function(particle) {
+
+        particle.update();
+        particle.draw();
+
+    });
+
+    connect();
+
+    requestAnimationFrame(animate);
+
+}
+
+// Start animation
+
+init();
+animate();
+
+</script>
+
+</body>
+</html>
+
